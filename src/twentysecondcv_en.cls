@@ -1,4 +1,4 @@
-\ProvidesClass{twentysecondcv}[2017/01/08 CV class]
+\ProvidesClass{twentysecondcv_en}[2017/01/08 CV class]
 \LoadClass{article}
 \NeedsTeXFormat{LaTeX2e}
 
@@ -170,7 +170,7 @@
 		%------------------------------------------------
 		
 		\ifthenelse{\equal{\aboutme}{}}{}{
-			\profilesection{Sobre m\'i}
+			\profilesection{About me}
 			\begin{flushleft}
                 \aboutme
 			\end{flushleft}
@@ -178,7 +178,7 @@
 
 		%------------------------------------------------
 
-		\profilesection{Habilidades}
+		\profilesection{Skills}
 
 		\skills
 		\skillstext

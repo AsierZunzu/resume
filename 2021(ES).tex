@@ -1,0 +1,263 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Twenty Seconds Resume/CV
+% LaTeX Template
+% Version 1.1 (8/1/17)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Carmine Spagnuolo (cspagnuolo@unisa.it) with major modifications by 
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% The MIT License (see included LICENSE file)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[letterpaper]{twentysecondcv} % a4paper for A4
+\usepackage[utf8x]{inputenc}
+
+%----------------------------------------------------------------------------------------
+%	 PERSONAL INFORMATION
+%----------------------------------------------------------------------------------------
+
+% If you don't need one or more of the below, just remove the content leaving the command, e.g. \cvnumberphone{}
+
+\profilepic{Profile(profesional)[v2].jpg} % Profile picture
+
+\cvname{Asier Zunzunegui} % Your name
+\cvjobtitle{Ingeniero Informático} % Job title/career
+
+\cvdate{6 de Mayo de 1994} % Date of birth
+\cvaddress{Vitoria-Gasteiz} % Short address/location, use \newline if more than 1 line is required
+\cvnumberphone{688664339} % Phone number
+\cvlinkedin{linkedin.com/in/asier-zunzunegui} % Personal website
+\cvgithub{github.com/AsierZunzu} % Personal website
+\cvmail{asier.zunzu@gmail.com} % Email address
+
+
+
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	 ABOUT ME
+%----------------------------------------------------------------------------------------
+
+\aboutme{
+Informático por vocación y apasionado de la tecnología, disfruto desarrollando nuevas destrezas tanto para mi vida personal como profesional. Soy metódico, disciplinado y constante. Disfruto el trabajo en equipo y cambios de paradigma. Empecé como programador autodidacta, lo cual me hizo amante del Clean Code cuando adquirí conocimientos de ingeniería.} % To have no About Me section, just remove all the text and leave \aboutme{}
+
+%----------------------------------------------------------------------------------------
+%	 SKILLS
+%----------------------------------------------------------------------------------------
+
+% Skill bar section, each skill must have a value between 0 an 6 (float)
+\skills{
+    {C++, Python, Linux Mgmt., etc. /1.5},
+    {JavaScript, C /2},
+    {MySQL, Oracle, PostgreSQL /4},
+    {RESTful APIs, SOAP, Postman /4.5},
+    {Java, PHP /5},
+    {Magento (1\&2), Symfony /5.1},
+    {Salesforce Commerce Cloud /5.3},
+    {GIT /5.8}}
+
+%------------------------------------------------
+
+% Skill text section, each skill must have a value between 0 an 6
+% \skillstext{{Liderazgo/4},{Emprendimiento/3}}
+
+%----------------------------------------------------------------------------------------
+
+\makeprofile % Print the sidebar
+
+
+%----------------------------------------------------------------------------------------
+%	 PUBLICATIONS
+%----------------------------------------------------------------------------------------
+
+% \section{Publications}
+
+% \begin{twentyshort} % Environment for a short list with no descriptions
+% 	\twentyitemshort{1865}{Chapter One, Down the Rabbit Hole.}
+% 	\twentyitemshort{1865}{Chapter Two, The Pool of Tears.}
+% 	\twentyitemshort{1865}{Chapter Three,  The Caucus Race and a Long Tale.}
+% 	\twentyitemshort{1865}{Chapter Four,  The Rabbit Sends a Little Bill.}
+% 	\twentyitemshort{1865}{Chapter Five,  Advice from a Caterpillar.}
+% 	%\twentyitemshort{<dates>}{<title/description>}
+% \end{twentyshort}
+
+%----------------------------------------------------------------------------------------
+%	 EXPERIENCE
+%----------------------------------------------------------------------------------------
+
+\section{Experiencia laboral}
+
+\begin{twenty} % Environment for a list with descriptions
+	\twentyitem{2018-acte.}
+	    {Frontend, integrations and API developer}
+    	{On4u Global Services}
+    	{Desarrollo eCommerce Magento y Salesforce-CC con integraciones a medida, middleware, desarrollo de APIs y programas de formación.}
+	\twentyitem{2018-2018}
+	    {Desarrollador Java}
+    	{Axpe Consulting}
+    	{Desarrollo de aplicaciones Java para el Departamento de Justicia del Gobierno Vasco.}
+	\twentyitem{2016-2018}
+	    {Presidente}
+    	{Junior Empresa Magna SIS}
+    	{Dirección, representación y desarrollo.}
+% 	\twentyitem{2016-2017}
+% 	    {Monitor Extraescolar de Informática}
+%     	{Inmaculada Concepción Abetxuko}
+%     	{Iniciación a informática y conceptos básicos de programación.}
+% 	\twentyitem{2016-2017}
+%       {Profesor particular}
+%     	{Vitoria-Gasteiz}
+%     	{Clases de Euskera y refuerzo nivel ESO.}
+	\twentyitem{2015-2016}
+	    {Socio}
+    	{Junior Empresa Magna SIS} 
+    	{Gestión de mantenimientos web y contacto con clientes.}
+% 	\twentyitem{2013-2015}
+%     	{Coordinador de actividades}
+%     	{Residencia Manuel Agud Querol}
+%     	{Gestión de la sociedad gastronómica LaCafe y actividades.}
+	%\twentyitem{<dates>}{<title>}{<location>}{<description>}
+\end{twenty}
+
+%----------------------------------------------------------------------------------------
+%	 LANGUAGES
+%----------------------------------------------------------------------------------------
+
+\section{Idiomas}
+
+\begin{twentyshort} % Environment for a short list with no descriptions
+	\twentyitemshort{Espa\~nol}{Materno}
+	\twentyitemshort{Euskera}{Materno, Euskararen Gaitasun Agiria (EGA)}
+	\twentyitemshort{Inglés}{Cambridge English: Advanced (CAE)}
+	%\twentyitemshort{<dates>}{<title/description>}
+\end{twentyshort}
+
+%----------------------------------------------------------------------------------------
+%	 EDUCATION
+%----------------------------------------------------------------------------------------
+
+\section{Formación}
+
+\begin{twenty} % Environment for a list with descriptions
+	\twentyitem{2012-2017}
+	{Estudios universitarios}
+	{UPV/EHU}
+	{Grado en Ingeniería Informática - Ingeniería del Software}
+	\twentyitem{2010-2012}
+	{Bachillerato + Secundaria}
+	{IES Mendebaldea BHI}
+	{Ciencias, Modelo D}
+	\twentyitem{2000-2006}
+	{Educación Primaria}
+	{Abenda\~no Ikastola}
+	{Modelo D}
+	%\twentyitem{<dates>}{<title>}{<location>}{<description>}
+\end{twenty}
+
+%----------------------------------------------------------------------------------------
+%	 OTHER STUDIES
+%----------------------------------------------------------------------------------------
+
+\section{Formación extra-académica}
+
+\begin{twentyshort} % Environment for a short list with no descriptions
+
+	\twentyitemshort{2020}{Lectura: Refactoring by Martin Fowler}
+	\twentyitemshort{2018}{Lectura: Clean Code by Robert C. Martin}
+	\twentyitemshort{2016}{I Congreso EuskalHack Security Congress en Donostia-San Sebastián}
+	\twentyitemshort{2013}{IV Congreso Estatal RITSI en Donostia-San Sebastián}
+% 	\twentyitemshort{2016}{Curso ``Cyber Security: Safety at Home, Online, in Life'' de Newcastle University}
+% 	\twentyitemshort{2014}{Curso de iniciación a Arduino impartido en la UPV/EHU}
+% 	\twentyitemshort{2013}{Carnet de Manipulador de alimentos de mayor riesgo}
+% 	\twentyitemshort{2013}{Curso MOOC de desarrollo básico en Android}
+\end{twentyshort}
+
+%----------------------------------------------------------------------------------------
+%	 PROJECTS
+%----------------------------------------------------------------------------------------
+
+\section{Proyectos personales}
+
+\begin{twenty} % Environment for a short list with no descriptions
+	\twentyitem{C++ \& Qt}
+    	{\href{https://github.com/ASantosVal/EMM_for_VLC}
+    	{Extended Metadata Manager for VLC \faExternalLink} }
+    	{}
+    	{Trabajo de Fin de Grado, evaluado con un 10.}
+	\twentyitem{Django}
+    	{\href{https://roomate-magnarenove.herokuapp.com/}
+    	{Roomate \faExternalLink} }
+    	{}
+    	{Prácticas en Magna SIS.}
+\end{twenty}
+
+
+%----------------------------------------------------------------------------------------
+%	 Career
+%----------------------------------------------------------------------------------------
+
+\section{Expectativas profesionales}
+
+Busco trabajar en entornos que me permitan seguir desarrollando mis capacidades de manera constante. Un lugar en el que pueda continuar haciendo cosas nuevas a lo largo de mi carrera. Una organización que entienda que mi pasión es el software, y me permita crecer en ese nicho, sin que las expectativas de crecimiento me terminen alejando de la ingeniería para pasar únicamente a la gestión.
+
+%----------------------------------------------------------------------------------------
+%	 OTHER INFORMATION
+%----------------------------------------------------------------------------------------
+
+\section{Otros}
+
+\begin{customList} % Environment for a short list with no descriptions
+	\customListItem{Carné de conducir B y vehículo propio.}
+% 	\customListItem{Infraestructura preparada para trabajo telemático.}
+% 	\customListItem{Portátil de alto rendimiento.}
+\end{customList}
+
+%----------------------------------------------------------------------------------------
+%	 INTERESTS
+%----------------------------------------------------------------------------------------
+
+\section{Intereses}
+
+\begin{customList} % Environment for a short list with no descriptions
+    \customListItem{Cocina.}
+    \customListItem{Jardinería (tradicional y hidropónica).}
+	\customListItem{Juegos (de mesa y digitales) y cine indie.}
+	\customListItem{Adquisición de nuevas habilidades desde el bricolaje hasta las soft skills.}
+\end{customList}
+
+%----------------------------------------------------------------------------------------
+%	 SECOND PAGE EXAMPLE
+%----------------------------------------------------------------------------------------
+
+%\newpage % Start a new page
+
+%\makeprofile % Print the sidebar
+
+%\section{Other information}
+
+%\subsection{Review}
+
+%Alice approaches Wonderland as an anthropologist, but maintains a strong sense of noblesse oblige that comes with her class status. She has confidence in her social position, education, and the Victorian virtue of good manners. Alice has a feeling of entitlement, particularly when comparing herself to Mabel, whom she declares has a ``poky little house," and no toys. Additionally, she flaunts her limited information base with anyone who will listen and becomes increasingly obsessed with the importance of good manners as she deals with the rude creatures of Wonderland. Alice maintains a superior attitude and behaves with solicitous indulgence toward those she believes are less privileged.
+
+%\section{Other information}
+
+%\subsection{Review}
+
+%Alice approaches Wonderland as an anthropologist, but maintains a strong sense of noblesse oblige that comes with her class status. She has confidence in her social position, education, and the Victorian virtue of good manners. Alice has a feeling of entitlement, particularly when comparing herself to Mabel, whom she declares has a ``poky little house," and no toys. Additionally, she flaunts her limited information base with anyone who will listen and becomes increasingly obsessed with the importance of good manners as she deals with the rude creatures of Wonderland. Alice maintains a superior attitude and behaves with solicitous indulgence toward those she believes are less privileged.
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 

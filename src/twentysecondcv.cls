@@ -1,4 +1,4 @@
-\ProvidesClass{twentysecondcv_en}[2017/01/08 CV class]
+\ProvidesClass{twentysecondcv}[2017/01/08 CV class]
 \LoadClass{article}
 \NeedsTeXFormat{LaTeX2e}
 
@@ -77,6 +77,8 @@
 \newcommand{\profilepic}[1]{\renewcommand{\profilepic}{#1}}
 \newcommand{\cvname}[1]{\renewcommand{\cvname}{#1}}
 \newcommand{\cvjobtitle}[1]{\renewcommand{\cvjobtitle}{#1}}
+\newcommand{\aboutmetranslation}[1]{\renewcommand{\aboutmetranslation}{#1}}
+\newcommand{\skillstranslation}[1]{\renewcommand{\skillstranslation}{#1}}
 
 % Command for printing the contact information icons
 \newcommand*\icon[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt, fill=mainblue,mainblue,text=white] (char) {#1};}}
@@ -170,7 +172,7 @@
 		%------------------------------------------------
 		
 		\ifthenelse{\equal{\aboutme}{}}{}{
-			\profilesection{About me}
+			\profilesection{\aboutmetranslation}
 			\begin{flushleft}
                 \aboutme
 			\end{flushleft}
@@ -178,7 +180,7 @@
 
 		%------------------------------------------------
 
-		\profilesection{Skills}
+		\profilesection{\skillstranslation}
 
 		\skills
 		\skillstext

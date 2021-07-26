@@ -3,7 +3,7 @@
 \NeedsTeXFormat{LaTeX2e}
 
 %----------------------------------------------------------------------------------------
-%	 REQUIRED PACKAGES
+%  REQUIRED PACKAGES
 %----------------------------------------------------------------------------------------
 
 \RequirePackage[sfdefault]{ClearSans}
@@ -23,8 +23,10 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 
+\usetikzlibrary{calc}
+
 %----------------------------------------------------------------------------------------
-%	 COLOURS
+%  COLOURS
 %----------------------------------------------------------------------------------------
 
 \definecolor{white}{RGB}{255,255,255}
@@ -34,7 +36,7 @@
 \definecolor{maingray}{HTML}{B9B9B9}
 
 %----------------------------------------------------------------------------------------
-%	 MISC CONFIGURATIONS
+%  MISC CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
 \renewcommand{\bfseries}{\color{gray}} % Make \textbf produce coloured text instead
@@ -44,7 +46,7 @@
 \setlength{\parindent}{0pt} % Disable paragraph indentation
 
 %----------------------------------------------------------------------------------------
-%	 SIDEBAR DEFINITIONS
+%  SIDEBAR DEFINITIONS
 %----------------------------------------------------------------------------------------
 
 \setlength{\TPHorizModule}{1cm} % Left margin
@@ -58,12 +60,12 @@
 \newlength{\TotalSectionLength} % Define a new length to hold the remaining line width after the section title is printed
 \newlength{\SectionTitleLength} % Define a new length to hold the width of the section title
 \newcommand{\profilesection}[1]{%
-	\setlength\TotalSectionLength{\linewidth}% Set the total line width
-	\settowidth{\SectionTitleLength}{\huge #1 }% Calculate the width of the section title
-	\addtolength\TotalSectionLength{-\SectionTitleLength}% Subtract the section title width from the total width
-	\addtolength\TotalSectionLength{-2.22221pt}% Modifier to remove overfull box warning
-	\vspace{8pt}% Whitespace before the section title
-	{\color{black!80} \LARGE #1 \rule[0.15\baselineskip]{\TotalSectionLength}{1pt}}% Print the title and auto-width rule
+  \setlength\TotalSectionLength{\linewidth}% Set the total line width
+  \settowidth{\SectionTitleLength}{\huge #1 }% Calculate the width of the section title
+  \addtolength\TotalSectionLength{-\SectionTitleLength}% Subtract the section title width from the total width
+  \addtolength\TotalSectionLength{-2.22221pt}% Modifier to remove overfull box warning
+  \vspace{8pt}% Whitespace before the section title
+  {\color{black!80} \LARGE #1 \rule[0.15\baselineskip]{\TotalSectionLength}{1pt}}% Print the title and auto-width rule
 }
 
 % Define custom commands for CV info
@@ -79,225 +81,233 @@
 \newcommand{\cvjobtitle}[1]{\renewcommand{\cvjobtitle}{#1}}
 \newcommand{\aboutmetranslation}[1]{\renewcommand{\aboutmetranslation}{#1}}
 \newcommand{\skillstranslation}[1]{\renewcommand{\skillstranslation}{#1}}
+\newcommand{\skillscaptiontranslation}[1]{\renewcommand{\skillscaptiontranslation}{#1}}
 
 % Command for printing the contact information icons
 \newcommand*\icon[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt, fill=mainblue,mainblue,text=white] (char) {#1};}}
 
 % Command for printing skill progress bars
-\newcommand\skills[1]{ 
-	\renewcommand{\skills}{
-		\begin{tikzpicture}
-			\foreach [count=\i] \x/\y in {#1}{
-				\draw[fill=maingray,maingray] (0,\i) rectangle (6,\i+0.4);
-				\draw[fill=white,mainblue](0,\i) rectangle (\y,\i+0.4);
-				\node [above right] at (0,\i+0.4) {\x};
-			}
-		\end{tikzpicture}
-	}
+\newcommand\skills[1]{
+  \renewcommand{\skills}{
+    \begin{tikzpicture}
+      \foreach [count=\i] \x/\y in {#1}{
+          \draw[fill=maingray,maingray] (0,-\i) rectangle (6,-\i+0.4);
+          \draw[fill=white,mainblue](0,-\i) rectangle (1.2*\y,-\i+0.4);
+          \node [above right ] at (0,-\i+0.4) {\x};
+          \foreach \z in {0,1,2,...,10}
+          {
+            \coordinate (A\z) at ($(0,-\i)+(1.2*\z*0.5cm,0)$) {};
+            \ifodd\z
+                \draw[white] ($(A\z)$) -- ($(A\z)+(0,2.5pt)$);
+            \else
+                \draw[white] ($(A\z)$) -- ($(A\z)+(0,5pt)$);
+            \fi
+          }
+        }
+    \end{tikzpicture}
+  }
 }
 
 % Command for printing skills text
-\newcommand\skillstext[1]{ 
-	\renewcommand{\skillstext}{
-		\begin{flushleft}
-			\foreach [count=\i] \x/\y in {#1}{ 
-				\x$ \star $\y
-			}
-		\end{flushleft}
-	}
+\newcommand\skillstext[1]{
+  \renewcommand{\skillstext}{
+    \begin{flushleft}
+        +
+      \foreach [count=\i] \x/\y in {#1}{
+          \x
+        }
+    \end{flushleft}
+  }
 }
 
 %----------------------------------------------------------------------------------------
-%	 SIDEBAR LAYOUT
+%  SIDEBAR LAYOUT
 %----------------------------------------------------------------------------------------
 
 \newcommand{\makeprofile}{
-	\begin{tikzpicture}[remember picture,overlay]
-   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
-	\end{tikzpicture}
+  \begin{tikzpicture}[remember picture,overlay]
+    \node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
+  \end{tikzpicture}
 
-	%------------------------------------------------
+  %------------------------------------------------
 
-	\begin{textblock}{6}(0.5, 0.2)
-			
-		%------------------------------------------------
-		
-		\ifthenelse{\equal{\profilepic}{}}{}{
-			\begin{center}
-				\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-					\clip (600/2, 567/2) circle (567/2);
-					\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{\profilepic}};
-				\end{tikzpicture}
-			\end{center}
-		}
+  \begin{textblock}{6}(0.5, 0.2)
 
-		%------------------------------------------------
+    %------------------------------------------------
 
-		{\huge\color{mainblue}\cvname}
+    \ifthenelse{\equal{\profilepic}{}}{}{
+      \begin{center}
+        \begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+          \clip (600/2, 567/2) circle (567/2);
+          \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{\profilepic}};
+        \end{tikzpicture}
+      \end{center}
+    }
 
-		%------------------------------------------------
+    %------------------------------------------------
 
-		{\Large\color{black!80}\cvjobtitle}
+    {\huge\color{mainblue}\cvname}
 
-		%------------------------------------------------
-		\renewcommand{\arraystretch}{1.6}
-		\begin{tabular}{p{0.5cm} @{\hskip 0.5cm}p{5cm}}
+    %------------------------------------------------
 
-			\ifthenelse{\equal{
-			    \cvdate}{}}{}{\textsc{\fontsize{11}{0}\icon{\faHeart}} & 
-			    \cvdate\\
-			}
-			\ifthenelse{\equal{
-			    \cvaddress}{}}{}{\textsc{\Large\icon{\faMapMarker}} & 
-			    \cvaddress\\
-		    }
-			\ifthenelse{\equal{
-			    \cvnumberphone}{}}{}{\textsc{\fontsize{13}{0}\icon{\faPhone}} & 
-			    \cvnumberphone\\
-			}
-			\ifthenelse{\equal{
-			    \cvlinkedin}{}}{}{\textsc{\large\icon{\faLinkedinSquare}} & 
-			    \href{https://\cvlinkedin}{\cvlinkedin\ \faExternalLink}\\
-			}
-			\ifthenelse{\equal{
-			    \cvgithub}{}}{}{\textsc{\large\icon{\faGithub}} & 
-			    \href{https://\cvgithub}{\cvgithub\ \faExternalLink}\\
-			}
-			\ifthenelse{\equal{
-			    \cvmail}{}}{}{\textsc{\large\icon{\faAt}} & 
-			    \href{mailto:\cvmail}{\cvmail\ \faExternalLink}
-			}
-		\end{tabular}
+    {\Large\color{black!80}\cvjobtitle}
 
-		%------------------------------------------------
-		
-		\ifthenelse{\equal{\aboutme}{}}{}{
-			\profilesection{\aboutmetranslation}
-			\begin{flushleft}
-                \aboutme
-			\end{flushleft}
-		}
+    %------------------------------------------------
+    \renewcommand{\arraystretch}{1.6}
+    \begin{tabular}{p{0.5cm} @{\hskip 0.5cm}p{5cm}}
 
-		%------------------------------------------------
+      \ifthenelse{\equal{
+      \cvdate}{}}{}{\textsc{\fontsize{11}{0}\icon{\faHeart}}        &
+        \cvdate\\
+      }
+      \ifthenelse{\equal{
+      \cvaddress}{}}{}{\textsc{\Large\icon{\faMapMarker}}           &
+        \cvaddress\\
+      }
+      \ifthenelse{\equal{
+      \cvnumberphone}{}}{}{\textsc{\fontsize{13}{0}\icon{\faPhone}} &
+        \cvnumberphone\\
+      }
+      \ifthenelse{\equal{
+      \cvlinkedin}{}}{}{\textsc{\large\icon{\faLinkedinSquare}}     &
+        \href{https://\cvlinkedin}{\cvlinkedin\ \faExternalLink}\\
+      }
+      \ifthenelse{\equal{
+      \cvgithub}{}}{}{\textsc{\large\icon{\faGithub}}               &
+        \href{https://\cvgithub}{\cvgithub\ \faExternalLink}\\
+      }
+      \ifthenelse{\equal{
+      \cvmail}{}}{}{\textsc{\large\icon{\faAt}}                     &
+        \href{mailto:\cvmail}{\cvmail\ \faExternalLink}
+      }
+    \end{tabular}
 
-		\profilesection{\skillstranslation}
+    %------------------------------------------------
 
-		\skills
-		\skillstext
-		\scriptsize
-% 		*Escala es de 0 (Conocimientos B\'asicos) a 6 (Experto).
-			
-		%------------------------------------------------
-			
-	\end{textblock}
+    \ifthenelse{\equal{\aboutme}{}}{}{
+      \profilesection{\aboutmetranslation}
+      \begin{flushleft}
+        \aboutme
+      \end{flushleft}
+    }
+
+    %------------------------------------------------
+
+    \profilesection{\skillstranslation}
+
+    \skills
+    \skillscaptiontranslation
+    \skillstext
+
+  \end{textblock}
 }
 
 %----------------------------------------------------------------------------------------
-%	 COLOURED SECTION TITLE BOX
+%  COLOURED SECTION TITLE BOX
 %----------------------------------------------------------------------------------------
 
 % Command to create the rounded boxes around the first three letters of section titles
 \newcommand*\round[2]{%
-	\tikz[baseline=(char.base)]\node[anchor=north west, draw,rectangle, rounded corners, inner sep=3pt, minimum size=5.5mm, text height=3.6mm, fill=#2,#2,text=white](char){#1};%
+  \tikz[baseline=(char.base)]\node[anchor=north west, draw,rectangle, rounded corners, inner sep=3pt, minimum size=5.5mm, text height=3.6mm, fill=#2,#2,text=white](char){#1};%
 }
 
 \newcounter{colorCounter}
 \newcommand{\sectioncolor}[1]{%
-	{%
-		\round{#1}{
-			\ifcase\value{colorCounter}%
-			maingray\or%
-			mainblue\or%
-			maingray\or%
-			mainblue\or%
-			maingray\or%
-			mainblue\or%
-			maingray\or%
-			mainblue\or%
- 			maingray\or%
-			mainblue\else%
-			maingray\fi%
-		}%
-	}%
-	\stepcounter{colorCounter}%
+  {%
+      \round{#1}{
+        \ifcase\value{colorCounter}%
+          maingray\or%
+          mainblue\or%
+          maingray\or%
+          mainblue\or%
+          maingray\or%
+          mainblue\or%
+          maingray\or%
+          mainblue\or%
+          maingray\or%
+          mainblue\else%
+          maingray\fi%
+      }%
+    }%
+  \stepcounter{colorCounter}%
 }
 
 \renewcommand{\section}[1]{
-	{%
-		\color{gray}%
-		\Large\sectioncolor{#1}%
-	}
+  {%
+      \color{gray}%
+      \Large\sectioncolor{#1}%
+    }
 }
 
 \renewcommand{\subsection}[1]{
-	\par\vspace{.5\parskip}{%
-		\large\color{gray} #1%
-	}
-	\par\vspace{.25\parskip}%
+  \par\vspace{.5\parskip}{%
+    \large\color{gray} #1%
+  }
+  \par\vspace{.25\parskip}%
 }
 
 %----------------------------------------------------------------------------------------
-%	 LONG LIST ENVIRONMENT
+%  LONG LIST ENVIRONMENT
 %----------------------------------------------------------------------------------------
 
 \setlength{\tabcolsep}{0pt}
 
 % New environment for the long list
 \newenvironment{twenty}{%
-	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
-}{%
-	\end{tabular*}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+    }{%
+  \end{tabular*}
 }
 
 \newcommand{\twentyitem}[4]{%
-	#1&\parbox[t]{0.83\textwidth}{%
-	\textbf{#2}%
-		\hfill%
-		{\footnotesize#3}\\%
-		\color{brown}#4\vspace{\parsep}%
-	}\\
+  #1&\parbox[t]{0.83\textwidth}{%
+    \textbf{#2}%
+    \hfill%
+    {\footnotesize#3}\\%
+    \color{brown}#4\vspace{\parsep}%
+  }\\
 }
 
 %----------------------------------------------------------------------------------------
-%	 SMALL LIST ENVIRONMENT
+%  SMALL LIST ENVIRONMENT
 %----------------------------------------------------------------------------------------
 
 \setlength{\tabcolsep}{0pt}
 
 % New environment for the small list
 \newenvironment{twentyshort}{%
-	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
-}{%
-	\end{tabular*}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+    }{%
+  \end{tabular*}
 }
 
 \newcommand{\twentyitemshort}[2]{%
-	#1&\parbox[t]{0.83\textwidth}{%
-		\textbf{\color{gray}#2}%
-	}\\
+  #1&\parbox[t]{0.83\textwidth}{%
+    \textbf{\color{gray}#2}%
+  }\\
 }
 
 
 
 %----------------------------------------------------------------------------------------
-%	 customListm ENVIRONMENT
+%  customListm ENVIRONMENT
 %----------------------------------------------------------------------------------------
 
 \setlength{\tabcolsep}{0pt}
 
 % New environment for the small list
 \newenvironment{customList}{%
-	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
-}{%
-	\end{tabular*}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+    }{%
+  \end{tabular*}
 }
 
 \newcommand{\customListItem}[1]{%
-	\textbf{\color{gray}{#1}}\\%
+  \textbf{\color{gray}{#1}}\\%
 }
 
 %----------------------------------------------------------------------------------------
-%	 MARGINS AND LINKS
+%  MARGINS AND LINKS
 %----------------------------------------------------------------------------------------
 
 \RequirePackage[left=7.6cm,top=0.1cm,right=1cm,bottom=0.2cm,nohead,nofoot]{geometry}
